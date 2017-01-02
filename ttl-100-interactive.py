@@ -5,14 +5,14 @@ import serial, time, threading, sys
 HOSTNAME = "protina"
 RATE_S = 3
 
-ser = serial.Serial("/dev/cu.SLAB_USBtoUART", 9600)
+ser = serial.Serial("/dev/cu.SLAB_USBtoUART", 9600, timeout=RATE_S)
 print("Connected to {}".format(ser.name))
 
 i = 0
 def schedule_send_hello():
     threading.Timer(RATE_S, schedule_send_hello).start()
     global i
-    msg = "{}: hello {} from {}! Es wird kalt....\n".format(int(time.time()), str(i), HOSTNAME)
+    msg = "{}: hello {} from {}!\n".format(int(time.time()), str(i), HOSTNAME)
     i += 1
     ser.write(msg)
     sys.stdout.write(msg)
@@ -22,6 +22,7 @@ schedule_send_hello()
 
 recv_lines = []
 while True:
-    line = ser.readline()
+    line = ser.read(1)
     recv_lines += line
-    print(line)
+    sys.stdout.write(line)
+    sys.stdout.flush()
