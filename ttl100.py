@@ -16,7 +16,7 @@ reset_cmd = [0xc4, 0xc4, 0xc4]
 
 def get_serial_port(location=None):
     default_locations = [
-        "/dev/cu.SLAB_USBtoUART",
+        "/dev/ttyUSB0",
         "/dev/cu.SLAB_USBtoUART"
     ]
     
