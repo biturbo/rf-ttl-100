@@ -7,7 +7,8 @@ port = ttl100.get_serial_port()
 while True:
     line = ""
     while len(line) == 0 or line[-1] != "\n":
-        line += port.read(1)
+        read = port.read(1)
+        line += read
     sys.stdout.write(str(datetime.datetime.now()) + " " + line)
     sys.stdout.flush()
     
