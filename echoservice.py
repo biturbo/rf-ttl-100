@@ -4,7 +4,6 @@
 import ttl100, time, sys, datetime
 port = ttl100.get_serial_port()
 
-time.sleep(1)
 while True:
     line = ""
     while len(line) == 0 or line[-1] != "\n":
